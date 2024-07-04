@@ -216,157 +216,6 @@ namespace CentralisationV0.Controllers
         }
 
 
-        //[HttpPost]
-        //[AllowAnonymous]
-        //[ValidateAntiForgeryToken]
-        //public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return Json(new { success = false, message = "Invalid request." });
-        //    }
-
-        //    var user = await UserManager.FindByEmailAsync(model.Email);
-        //    if (user == null)
-        //    {
-        //        return Json(new { success = false, message = "User not found or email not confirmed." });
-        //    }
-
-        //    // Generate a new reset code
-        //    Random random = new Random();
-        //    string code = random.Next(100000, 999999).ToString();
-
-        //    // Hash and store the code on the user
-        //    var passwordHasher = new PasswordHasher();
-        //    user.PasswordHash = passwordHasher.HashPassword(code); // Hash the code before storing it in PasswordHash
-        //    user.PasswordResetCode = code; // Store the plain code for verification
-        //    user.IsReseted = true; // Set isReseted to true
-        //    var updateResult = await UserManager.UpdateAsync(user);
-
-        //    if (!updateResult.Succeeded)
-        //    {
-        //        return Json(new { success = false, message = "Failed to update user with reset code." });
-        //    }
-
-        //    // Send the new reset code by email
-        //    await SendResetCodeByEmail(user.Email, code);
-
-        //    return Json(new { success = true });
-        //}
-
-
-        //private async Task SendResetCodeByEmail(string userEmail, string code)
-        //{
-        //    try
-        //    {
-        //        // Send the code to the user's email
-        //        var senderEmail = new MailAddress("emm31640@gmail.com", "gmail");
-        //        var password = "elrmfxgsmymtpipy";
-        //        var receiverEmail = new MailAddress(userEmail, "User");
-        //        var subject = "Réinitialisation du mot de passe";
-        //        var body = $"Merci d'insérer le code de vérification dans le champ de mot de passe et de créer un nouveau mot de passe. Votre code de vérification est : {code}";
-
-        //        var smtp = new SmtpClient
-        //        {
-        //            Host = "smtp.gmail.com",
-        //            Port = 587,
-        //            EnableSsl = true,
-        //            DeliveryMethod = SmtpDeliveryMethod.Network,
-        //            Credentials = new NetworkCredential(senderEmail.Address, password)
-        //        };
-
-        //        using (var message = new MailMessage(senderEmail, receiverEmail)
-        //        {
-        //            Subject = subject,
-        //            Body = body
-        //        })
-        //        {
-        //            await smtp.SendMailAsync(message);
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        // Log the exception
-        //        // For example, using a logger:
-        //        // _logger.LogError(ex, "Error sending email.");
-        //        throw;
-        //    }
-        //}
-
-
-        //[HttpPost]
-        //[AllowAnonymous]
-        //[ValidateAntiForgeryToken]
-        //public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        var user = await UserManager.FindByEmailAsync(model.Email);
-        //        if (user == null)
-        //        {
-        //            return Json(new { success = false, message = "User not found or email not confirmed." });
-        //        }
-
-        //        // Generate a random numeric code
-        //        Random random = new Random();
-        //        string code = random.Next(100000, 999999).ToString();
-
-        //        // Save the code to the user (for example, in a custom field)
-        //        var passwordHasher = new PasswordHasher();
-        //        user.PasswordHash = passwordHasher.HashPassword(code); // Hash the code before storing it in PasswordHash
-        //        user.PasswordResetCode = code; // Store the plain code for verification
-        //        user.IsReseted = true; // Set isReseted to true
-        //        var updateResult = await UserManager.UpdateAsync(user);
-
-        //        if (!updateResult.Succeeded)
-        //        {
-        //            return Json(new { success = false, message = "Failed to update user with reset code." });
-        //        }
-
-        //        try
-        //        {
-        //            // Send the code to the user's email
-        //            var senderEmail = new MailAddress("emm31640@gmail.com", "gmail");
-        //            var password = "elrmfxgsmymtpipy";
-        //            var receiverEmail = new MailAddress(user.Email, "User");
-        //            var subject = "Réinitialisation du mot de passe";
-        //            var body = $"Merci d'insérer le code de vérification dans le champ de mot de passe et de créer un nouveau mot de passe. Votre code de vérification est : {code}";
-
-        //            var smtp = new SmtpClient
-        //            {
-        //                Host = "smtp.gmail.com",
-        //                Port = 587,
-        //                EnableSsl = true,
-        //                DeliveryMethod = SmtpDeliveryMethod.Network,
-        //                Credentials = new NetworkCredential(senderEmail.Address, password)
-        //            };
-
-        //            using (var message = new MailMessage(senderEmail, receiverEmail)
-        //            {
-        //                Subject = subject,
-        //                Body = body
-        //            })
-        //            {
-        //                await smtp.SendMailAsync(message);
-        //            }
-
-        //            return Json(new { success = true });
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            // Log the exception
-        //            // For example, using a logger:
-        //            // _logger.LogError(ex, "Error sending email.");
-        //            return Json(new { success = false, message = "Problém d'envoie d'email." });
-        //        }
-        //    }
-
-        //    return Json(new { success = false, message = "Invalid request." });
-        //}
-
-
-
-
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -377,15 +226,13 @@ namespace CentralisationV0.Controllers
                 var user = await UserManager.FindByEmailAsync(model.Email);
                 if (user == null)
                 {
-                    return Json(new { success = false, message = "Utilisateur non trouvé ou email non confirmé." });
+                    return Json(new { success = false, message = "Utilisateur non trouvé." });
                 }
 
-                // Utilisation d'un indicateur pour vérifier si l'email a déjà été envoyé
-                bool emailAlreadySent = !string.IsNullOrEmpty(user.PasswordResetCode);
-
-                if (emailAlreadySent)
+                if (!string.IsNullOrEmpty(user.PasswordResetCode))
                 {
-                    return Json(new { success = false, message = "Code de réinitialisation déjà envoyé." });
+                    // Si un code a déjà été envoyé, retournez un message approprié
+                    return Json(new { success = false, message = "Le code de réinitialisation a déjà été envoyé." });
                 }
 
                 try
@@ -394,56 +241,62 @@ namespace CentralisationV0.Controllers
                     Random random = new Random();
                     string code = random.Next(100000, 999999).ToString();
 
-                    // Enregistrez le code sur l'utilisateur (par exemple, dans un champ personnalisé)
-                    var passwordHasher = new PasswordHasher();
-                    user.PasswordHash = passwordHasher.HashPassword(code); // Hash le code avant de le stocker dans PasswordHash
-                    user.PasswordResetCode = code; // Stocke le code en clair pour la vérification
-                    user.IsReseted = true; // Définir isReseted sur true
-                    var updateResult = await UserManager.UpdateAsync(user);
+                    // Enregistrer le code sur l'utilisateur
+                    user.PasswordResetCode = code;
 
-                    if (!updateResult.Succeeded)
+                    if (code != null && user.PasswordResetCode != null)
                     {
-                        return Json(new { success = false, message = "Échec de la mise à jour de l'utilisateur avec le code de réinitialisation." });
+                        var updateResult = await UserManager.UpdateAsync(user);
+
+                        if (!updateResult.Succeeded)
+                        {
+                            return Json(new { success = false, message = "Échec de la mise à jour de l'utilisateur avec le code de réinitialisation." });
+                        }
+
+                        // Envoyer le code à l'e-mail de l'utilisateur
+                        var senderEmail = new MailAddress("emm31640@gmail.com", "gmail");
+                        var password = "elrmfxgsmymtpipy";
+                        var receiverEmail = new MailAddress(user.Email, "User");
+                        var subject = "Réinitialisation du mot de passe";
+                        var body = $"Merci d'insérer le code de vérification dans le champ de mot de passe et de créer un nouveau mot de passe. Votre code de vérification est : {code}";
+
+                        var smtp = new SmtpClient
+                        {
+                            Host = "smtp.gmail.com",
+                            Port = 587,
+                            EnableSsl = true,
+                            DeliveryMethod = SmtpDeliveryMethod.Network,
+                            Credentials = new NetworkCredential(senderEmail.Address, password)
+                        };
+
+                        using (var message = new MailMessage(senderEmail, receiverEmail)
+                        {
+                            Subject = subject,
+                            Body = body
+                        })
+                        {
+                            await smtp.SendMailAsync(message);
+                        }
                     }
+                    
 
-                    // Envoyez le code à l'email de l'utilisateur
-                    var senderEmail = new MailAddress("emm31640@gmail.com", "gmail");
-                    var password = "elrmfxgsmymtpipy";
-                    var receiverEmail = new MailAddress(user.Email, "User");
-                    var subject = "Réinitialisation du mot de passe";
-                    var body = $"Merci d'insérer le code de vérification dans le champ de mot de passe et de créer un nouveau mot de passe. Votre code de vérification est : {code}";
-
-                    var smtp = new SmtpClient
-                    {
-                        Host = "smtp.gmail.com",
-                        Port = 587,
-                        EnableSsl = true,
-                        DeliveryMethod = SmtpDeliveryMethod.Network,
-                        Credentials = new NetworkCredential(senderEmail.Address, password)
-                    };
-
-                    using (var message = new MailMessage(senderEmail, receiverEmail)
-                    {
-                        Subject = subject,
-                        Body = body
-                    })
-                    {
-                        await smtp.SendMailAsync(message);
-                    }
+                   
 
                     return Json(new { success = true });
                 }
                 catch (Exception ex)
                 {
-                    // Log the exception
-                    // For example, using a logger:
-                    // _logger.LogError(ex, "Erreur lors de l'envoi de l'email.");
-                    return Json(new { success = false, message = "Problème d'envoi d'email." });
+                    // Logguer l'exception
+                    // Par exemple, utiliser un logger :
+                    // _logger.LogError(ex, "Erreur lors de l'envoi de l'e-mail de code de réinitialisation.");
+                    return Json(new { success = false, message = "Échec de l'envoi de l'e-mail de code de réinitialisation." });
                 }
             }
 
             return Json(new { success = false, message = "Requête invalide." });
         }
+
+
 
 
 
