@@ -264,17 +264,35 @@
     <Compile Include="Migrations\202406270956454_AddIsActivatedColumnToUser.designer.cs">
       <DependentUpon>202406270956454_AddIsActivatedColumnToUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202407050739302_AddingOtherTables.cs" />
+    <Compile Include="Migrations\202407050739302_AddingOtherTables.designer.cs">
+      <DependentUpon>202407050739302_AddingOtherTables.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Entities\ApplicationRole .cs" />
     <Compile Include="Models\Entities\ApplicationUser .cs" />
+    <Compile Include="Models\Entities\ArcgisSolution.cs" />
     <Compile Include="Models\Entities\CentralisationContext.cs" />
+    <Compile Include="Models\Entities\Client.cs" />
+    <Compile Include="Models\Entities\Collaboration.cs" />
+    <Compile Include="Models\Entities\ContactClient.cs" />
+    <Compile Include="Models\Entities\CoordinateSystem.cs" />
+    <Compile Include="Models\Entities\Data.cs" />
+    <Compile Include="Models\Entities\DataBase.cs" />
+    <Compile Include="Models\Entities\DataTyp.cs" />
     <Compile Include="Models\Entities\EditUserViewModel .cs" />
     <Compile Include="Models\Entities\ForgotPasswordViewModel.cs" />
+    <Compile Include="Models\Entities\HistoriqueData.cs" />
     <Compile Include="Models\Entities\Industry.cs" />
+    <Compile Include="Models\Entities\Location.cs" />
     <Compile Include="Models\Entities\LoginViewModel.cs" />
     <Compile Include="Models\Entities\ParametreViewModel.cs" />
     <Compile Include="Models\Entities\RegisterViewModel.cs" />
     <Compile Include="Models\Entities\ResetPasswordViewModel.cs" />
+    <Compile Include="Models\Entities\Role.cs" />
     <Compile Include="Models\Entities\Theme.cs" />
+    <Compile Include="Models\Entities\TypeCollaboration.cs" />
+    <Compile Include="Models\Entities\UseConstraint.cs" />
     <Compile Include="Models\Entities\VerifyCodeViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -395,6 +413,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202406270956454_AddIsActivatedColumnToUser.resx">
       <DependentUpon>202406270956454_AddIsActivatedColumnToUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202407050739302_AddingOtherTables.resx">
+      <DependentUpon>202407050739302_AddingOtherTables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

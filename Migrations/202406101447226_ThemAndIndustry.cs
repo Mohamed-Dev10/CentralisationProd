@@ -63,6 +63,7 @@
                         Prenom = c.String(),
                         DateNaissance = c.DateTime(nullable: false),
                         Address = c.String(),
+                        idRole = c.Int(nullable: false),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),
@@ -76,6 +77,8 @@
                         UserName = c.String(nullable: false, maxLength: 256),
                     })
                 .PrimaryKey(t => t.Id)
+                .ForeignKey("public.Role", t => t.idRole, cascadeDelete: true)
+                .Index(t => t.idRole)
                 .Index(t => t.UserName, unique: true, name: "UserNameIndex");
             
             CreateTable(

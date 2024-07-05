@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using CentralisationdeDonnee.Models;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using SQLiteNetExtensions.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +25,17 @@ namespace CentralisationV0.Models.Entities
         public bool isActivated { get; set; }
 
         public bool IsReseted { get; set; }
+
+
+
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(Role))]
+        public int idRole { get; set; }
+        public virtual Role Role { get; set; }
+
+
+
+        [ManyToMany(typeof(Collaboration))]
+        public virtual ICollection<Collaboration> Collaborations { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType

@@ -33,6 +33,7 @@ namespace CentralisationdeDonnee.Models
 
       
 
-       
+        [OneToMany(nameof(Data.Industry))]
+        public virtual ICollection<Data> Datas { get; set; }
     }
 }
